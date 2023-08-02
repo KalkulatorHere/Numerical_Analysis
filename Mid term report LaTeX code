@@ -1,0 +1,438 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=20mm,
+ top=20mm,
+ }
+
+\title{\textbf{Numerical Analysis}}
+\author{By Pranav Kulkarni(22B0642) ; Mentor: Himanshu Raj}
+
+
+\date{ 27 June 2023}
+
+\begin{document}
+
+\maketitle
+
+\section*{Introduction}
+This mid-term report emphasizes on the basics of Numerical Analysis. As we are aware that Numerical analysis is deeply connected with machine computations . I have majorly focussed on learning basic computational algorithms that computer uses in mathematical form.I have referred lectures of Prof. Shripad Garge available on YouTube (MA 214). The reference book I used is "Introduction to Numerical Analysis by S. Baskar and Shivaji Ganesh (IITB)"
+\section*{\textit{Chapter 1}}
+\section*{\textbf{Mathematical Preliminaries}}
+Numerical Analysis is the study of various methods used for 
+    \begin{itemize}
+        \item Solving various equations
+        \item Differential equations
+        \item System of linear equations
+        \item Or just say f(x)=$\alpha$
+        \item To approximate solutions
+        \item To study the corresponding errors we get
+    \end{itemize}
+Aspects of Numerical Analysis
+\begin{itemize}
+    \item The theory behind the calculations: Knowing the properties of exponential function and the Taylor's Theorem.
+    \item The computations which will be often done by calculators
+\end{itemize}
+\begin{itemize}
+    \item \subsection*{Taylor's Theorem}
+\end{itemize}
+One of the most important results used very frequently in numerical analysis, especially in error analysis of numerical methods. We will first define Taylor's polynomials and then go on to state Taylor's theorem.
+\subsubsection*{Taylor's polynomial for a function at a point}
+
+Let f be n-times differentiable at a given point a. The Taylor’s polynomial of degree n for the function f at the point a, denoted by $T_n$, is defined by
+
+$$T_n(x)=\sum_{k=0}^{n} \frac{f^(k) (a)}{k!}(x-a)^k ,x\epsilon R $$
+
+ \begin{itemize}
+\item \subsubsection*{Taylor's Theorem}
+ \end{itemize}
+ Let f be (n + 1)-times differentiable function on an open interval containing the points a and x. Then there exists a number $\xi$ between a
+and x such that
+$$f(x) = T_n(x) + \frac{f^{(n+1)} (\xi)}{
+(n + 1)!} (x-a)^{(n+1)}$$,where $T_n$ is taylor's polynomial as we discussed above for function f  at given point a and the second term is called remainder term.
+
+
+\textit{Note}: We have already discussed Limits and Continuity , Differentiation, Integration and Convergence in  MA courses in first two semesters . So in an attempt to keep the report concise, I will skip these topics here.
+
+\newpage
+\section*{\textbf{\textit{Chapter 2}}}
+\section*{Error Analysis}
+Numerical analysis deals with numerical methods , it approximates the solutions of a given mathematical problem.This approx. solution will have some error. finally we can write $$Exact \; solution= Approximate \; solution + Error$$
+A set of numerical numbers representing the approximation of the solution discovered via a numerical method is the output of the computer code. The numerical solution to the given mathematical issue is a set of such numerical values. The computer introduces a new error known as the arithmetic error throughout the computation process, and we have
+$$Approximate \; Solution = Numerical\; Solution + Arithmetic \;Error$$
+Hence
+$$Total\;error= Mathematical\;error+arithmetical\;error$$
+\subsection*{ Floating point representations}
+To understand computer's way of doing calculations,we will use a method to write numbers with familiar decimal representation instead of binary ones.
+Let $\beta$ $\in$ N and $\beta$  $>=$ 2. Any real number can be represented exactly in base $\beta$  as
+$$(-1)^s × (.d1d2... dnd{n+1}...){\beta} *\beta^e$$
+where $d_i\in$ ({{0,1....$\beta$ -1}} ) with $d_1 \neq $0 or $d_1=d_2=d_3=...=$0, s=0 or s=1
+Here $\beta$ fraction and number are called mantissa and radix resp. s is called sign . The above representation is called floating point representation.
+\subsubsection*.Floating-Point Approximation }
+A real number is kept in a computing device with just a limited number of digits in the mantissa. Despite the fact that different computing systems display numbers in a variety of ways, we introduce a mathematical version of this representation here.
+Any computer has its own memory restrictions when it comes to storing real numbers. These limits result in the mantissa's (n) and exponent's (e) ranges being restricted in terms of the floating-point representation.
+\subsubsection*{Chopping and Rounding a Number}
+Chopped and Rounded Numbers 
+Let $x \in R$ number is wrote in floating point representation as 
+$$x=(-1)^s × (.d1d2... dnd_{n+1}...){\beta} *\beta^e$$
+the floating point approximation is given as using n digit chopping is 
+$$fl(x)=(-1)^s × (.d1d2... dn){\beta} *\beta^e$$
+and using n digit rounding 
+$$fl(x)=(-1)^s × (.d1d2... dn){\beta} *\beta^e$$ when $0\le d_n<\beta$/2
+and $$fl(x)=(-1)^s × (.d1d2... (d{n}+1){\beta} *\beta^e$$
+when $\beta/2 \le d_n <\beta$
+
+\subsection*{Types of Errors}
+(1) The formula for calculating an error in a calculated number is Error = True Value - Approximate Value.
+(2) The term "absolute error" refers to an error's absolute value.
+(3) The relative error, which is defined as Relative Error = mistake True Value, is a measurement of the mistake in respect to the magnitude of the true value.
+In this case, we consider the true value to be non-zero.
+(4) The formula for the percentage error is Percentage Error = 100 *|Relative Error|.
+\subsection*{Loss of Significance}
+In place of relative error, we often use the concept of significant digits that is closely
+related to relative error.
+\subsubsection*{Significant beta digits}
+Let $\beta$ be a radix and x $\neq$ 0. If $x_A$ is an approximation to x, then we say that $x_A$ approximates x to r significant beta-digits if r is the largest non-negative integer such that
+
+$$|\frac{x-x_A}{x}| \le 0.5\beta^{1-r}$$
+Note : There is section Propagation of Relative Error in Arithmetic Operations  which we will not discuss here as it is pretty much intuitive and has been studied before as well.
+\newpage
+\section*{\textbf{\textit{Chapter 3}}}
+\section*{Nonlinear Equations}
+One of the most frequently occurring problems in practical applications is to find the roots
+of 
+$$f(x)=0$$
+f is a nonlinear function.
+where domain and range of f are [a,b] and R resp.
+It is obvious that not all non linear equations can be explicitly solved to exact value. So we have to approximate values of the solutions we get.In this chapter , we introduce iterative methods to approximate roots given the function f is nonlinear continuous.
+Basic procedure to find approximate roots goes in two steps as \linebreak
+(1) Starting Step: Take one or more points (arbitrarily or following a procedure) $x_i \in $
+[a, b] (i = 0, 1, · · · , m, m $\in$ N) around a root of the equation (4.1). Consider $x_m$ as an
+approximation to the root of (4.1).
+\linebreak
+(2) Improving Step: If $x_m$ is not ‘close’ to the required root, then devise a procedure to
+obtain another point $x_{m+1}$ that is ‘more close’ to the root than $x_m$.
+Repeat this step until we obtain a point $x_n$ (n $\ge$ m) which is ‘sufficiently close’ to the
+required root.
+The process of improving approximations is called iterative process.
+We will mostly deal with two iterative processes \newline
+1)Closed domain methods. \newline
+2)Open domain methods .
+
+\subsubsection*{Closed domain methods}
+The concept behind closed domain methods is to begin with an interval (denoted by [$a_0, b_0$]) in which at least one root of the given nonlinear equations exists, and then iteratively reduce the length of this interval with the requirement that there is at least one root of the equation at each iteration. We will focus on exact algorithm of these methods.
+\subsubsection*{Method 1: Bisection method}
+Algorithm steps
+Step I: : For n = 0, 1, 2, · · · , define the iterative sequence of the bisection method as
+$$x_{n+1}=\frac{a_n+b_n}{2}$$
+i.e midpt. of interval [$a_n,b_n$]
+\newline
+
+Step II :
+There are two cases possible 
+1)$x_{n+1}$ solves our eqn. , its the root. \newline
+2)$Either \; f(a_n)f(x_n+1) < 0 \;or f(b_n)f(x_n+1) < 0.
+Define \; the \; subinterval \; \newline [a_{n+1}, b_{n+1}] of \; [a_n, b_n] as \; follows.
+[a_{n+1}, b_{n+1}] = [a_n, x_{n+1}], \; if \; f(a_n)f(x_{n+1}) < 0,
+[x_{n+1}, b_n],\; if\; f(b_n)f(x_{n+1}) < 0.$\newline
+Step III: 
+1) If the first case happens then obviously $x_{n+1}$ is the root reqd.\newline2) ($b_{n+1}-a_{n+1}$) is sufficiently small then declare then declare $x_{n+2}$ as reqd root at a desired accuracy.
+\newline If any of the above stopping criteria does not hold, then go to step 1. Continue this process
+till one of the above two stopping criteria is fulfilled.
+\subsection*{Method 2 : Regula Falsi Method}
+Algorithm steps \newline
+Step I: For n=0,1,2....define the iterative sequence of the regula-falsi method as
+$$x_{n+1}=a_n-f(a_n) \frac{b_n-a_n}{f(b_n)-f(a_n)}=\frac{a_nf(b_n)-b_nf(a_n)}{f(b_n)-f(a_n)}$$
+which is the x-coordinate of the point of intersection of the line joining the points $(a_n, f(a_n)) and (b_n, f(b_n))$ (obtained at the n
+th iteration) with the x-axis.
+\newline
+Step II:There are two cases possible 
+1)$x_{n+1}$ solves our eqn. , its the root. \newline
+2)$Either \; f(a_n)f(x_n+1) < 0 \;or f(b_n)f(x_n+1) < 0.
+Define \; the \; subinterval \; \newline [a_{n+1}, b_{n+1}] of \; [a_n, b_n] as \; follows.
+[a_{n+1}, b_{n+1}] = [a_n, x_{n+1}], \; if \; f(a_n)f(x_{n+1}) < 0,
+[x_{n+1}, b_n],\; if\; f(b_n)f(x_{n+1}) < 0.$\newline
+Step III:
+Stop the iteration if case 1 in step II holds and declare $x_{n+1}$ as root otherwise go to first step and continue with iteration until we get desired accuracy.
+
+\subsection*{Stopping Criteria}
+In other words, we want to stop the computation at the $n^{th}$ iteration when the computed
+value is such that |$x_n-r$|<$\epsilon$ for some predetermined $\epsilon$.
+A different approach is to search for some criteria that, while not relying on our understanding of the root r, yet provides a general sense of how close we are to this root. The stopping criteria is a term for such a requirement.\newline
+Stopping Criterion I: Let there be a K$\in N$ and tell iteration to stop after finding $x_k$,we declare it as solution of our non linear eqn f(x)=0. \newline
+Stopping Criterion II: Fix some real value for $\epsilon$ and ask the iteration to stop after finding $x_k$ such that 
+$$|x_k-x_{k-N}|<\epsilon,where \;N \;is\; \;a\; natural \;number$$
+Stopping Criterion III:Fix some real value for $\epsilon$ and ask the iteration to stop after finding $x_k$ such that 
+$$|\frac{x_k-x_{k-N}}{x_k}|<\epsilon,where \;N \;is\; \;a\; natural \;number$$
+In both case II and III , it is convenient to take N=1\newline
+Stopping criterion IV: Fix some real value for $\epsilon$ and ask the iteration to stop after finding $x_k$ such that 
+$$|f(x_k)|<\epsilon$$
+\newline
+In all above discussed cases $x_k$ is declared approximate solution of our non linear equation.
+\subsection*{Open domain methods}
+\subsubsection*{Method 1 : Secant Method}
+This is a modification of Regula Falsi method , the only difference being that initial guesses $a_0 \;and \;b_0$ not on the either side of the root. 
+\newline
+Algorithm steps \newline
+$$x_{n+1}=x_{n-1}-f(x_{n-1}) \frac{x_n-x_{n-1}}{f(x_n)-f(x_{n-1})}=\frac{x_{n-1}f(x_n)-x_nf(x_{n-1})}{f(x_n)-f(x_{n-1})}$$
+Step II :
+Choose any one of the stopping criteria (or a combination of them) discussed in previous
+Section . If this criterion is satisfied, stop the iteration. Otherwise, repeat the step 1
+until the criterion is satisfied. 
+Recall that $ x_{n+1}$ for each n = 1, 2, · · · given by above equation is the x-coordinate of the point
+of intersection of the secant line joining the points ($x_{n−1}, f(x_{n−1}))\; and \;(x_n, f(x_n))$ with
+the x-axis and hence the name secant method.
+\subsubsection*{Example}
+Consider the equations
+$$sinx +x^2 =1$$
+Let $x_0=0 $ and $x_1=1$ then the iterations result in  \newline
+\includegraphics[scale=0.25]{fig 4.1.jpeg}
+Figure 4.1 shows the iterative points x2 and x3 in black bullet. Recall that the exact
+value of the root (to which the iteration seems to converge) unto 6 significant digits is
+r $\approx$ 0.636733. Obviously, the secant method is much faster than bisection method in this
+example. 
+
+\subsection*{Method 2 :Newton-Raphson Method}
+Secant method has linear order of convergence, if we modify this method we get quadratic order of convergence . To obtain quadratic order of convergence , we observe that as n tends to a very high value $x_{n-1}$ approaches $x_n$ hence we have 
+$$f'(x_n)\approx\frac{f(x_n)-f(x_{n-1})}{x_n-x_{n-1}}$$
+If f is differentiable then  on replacing slope of secant by slope of tangent at $x_n$ we get
+$$x_{n+1}=x_n-\frac{f(x_n)}{f'(x_n)}$$
+This is the Newton Raphson method \newline
+Now looking at previous problem and solving it by Newton Raphson method we get , \newline
+\includegraphics[scale=0.5]{fig 4.2.jpeg}
+Figure shows the iterative points $x_2$ and $x_3$ in black bullet. Recall that the exact
+solution is $x\approx0.636733$
+\newline 
+This shows that Newton Raphson method leads us much quickly to result as compared to secant method or bisection method.
+
+\subsection*{Method 3: Fixed-Point Iteration}
+In this method search for solution of nonlinear equation f(x)=0 is replaced by search for a fixed point of a function g and with the property that if $\alpha \in R$ is fixed point of g (g($\alpha$)=$\alpha$) , then f($\alpha)=0$ \newline
+Algorithm steps:\newline
+Choose an appropriate iteration function $g:[a,b]\to[a,b]$, choose interval [a,b] such that g is a self map.
+Step I: Make an initial guess $x_0\in[a,b]$
+Step II: Define iteration methods as $$x_{n+1}=g(x_n),n=0,1,2..$$
+Step III:For a pre assigned quantity $\epsilon$ check if any stopping criteria discussed before satisfies , if it does stop the iteration.Otherwise repeat the step I.
+\newline
+Consider the previous equation
+$$sinx+x^2=1$$
+Take initial interval [0,1].Three possible choice for iteration function \newline
+(1) $g_1(x)=sin^{-1}(1-x^2)$ \newline
+(2) $g_2(x)=-\sqrt{1-x^2}$ \newline
+(3) $g_3(x)=\sqrt{1-sinx}$ \newline
+here $g_1'(x)=\frac{-2}{\sqrt{2-x^2}}$ we have |$g_1'(x)$|>1 Take $x_0=0.8$ and $\epsilon$ be absolute error , we get \newline
+\includegraphics[scale=0.1]{fig 4.3.jpeg}
+This iteration is diverging.\newline
+Now,
+$$g_3'(x)=\frac{-cosx}{\sqrt{1-sinx}}<1$$
+Take $x_0=0.8$ and $\epsilon$ be absolute error , we get \newline
+\includegraphics[scale=0.1]{fig 4.4.jpeg}
+\newline 
+This is converging sequence.
+\pagebreak
+\section*{\textbf{\textit{Chapter 4}}}
+\section*{Interpolation}
+Let a physical experiment be conducted and the outcome is recorded only at some finite
+number of times. If we want to know the outcome at some intermediate time where the
+data is not available, then we may have to repeat the whole experiment once again.In India, we have census every 10 years but what if you want to know population in a intermediate year? Well, interpolation answers these questions.\newline 
+I will be stating definitions and theorems I learnt in the topic.
+\subsection*{Polynomial Interpolation}
+Basic concept of polynomial interpolation is to fit polynomial in the given data.Here \textbf{\textit{nodes}} come into picture. Any collection of distinct real numbers $x_0,x_1,...x_n$ is called nodes.
+Definition(Interpolating Polynomial):Let $x_0, x_1,..., x_n $be the given nodes and
+$y_0, y_1, .., y_n$ be real numbers. A polynomial $p_n(x)$ of degree less than or equal to n is said
+to be an interpolating polynomial if
+$$p_n(x_i)=y_i,\;\;\;i=0,1,2...$$
+This is called interpolation condition.
+\subsubsection*{Existence and Uniqueness of Interpolating polynomial}
+Theorem: Let $x_0,x_1,...,x_n$ be given nodes and $y_0,y_1,...,y_n$
+be given real numbers. \newline
+then there exists a polynomial $p_n(x)$ of degree less than or equal to n such that
+$$p_n(x_i)=y_i,\;\;\;i=0,1,2...$$
+i.e. an interpolating polynomial to the given data.\newline
+Such a polynomial is unique.
+\subsubsection*{(Lagrange’s form of Interpolating Polynomial)}
+Definition(Lagrange's Polynomial)\newline
+Let $x_0,x_1,...,x_n$ be given nodes and for each k=0,1,2..$l_k(x)$ is defined by 
+$$l_k(x)=\prod_{i=0;i\neq k}^{n} \frac{(x-x_i)}{(x_k-x_i)}$$
+and is called kth lagrange polynomial. 
+Note : If we add one more node $x_{n+1}$ then the interpolating polynomial $p_{n+1}(x)$ in the Lagrange’s form requires
+us to compute a new set of Lagrange’s polynomials corresponding to the set of (n + 1)
+nodes, and no advantage can be taken of the fact that $p_n$ is already available . This is cumbersome and costs a lot of time hence we come up alternative.
+\subsubsection*{Newton’s Form of Interpolating Polynomial
+}
+Here we write $p_n$ as
+$$p_n(x)=A_0+A_1(x-x_0)+A_2(x-x_0)(x-x_1)+...A_n \prod_{i=0}^{n-1}(x-x_i)$$
+where $A_0,A_1,...A_n$ are constants.
+This form of the interpolating polynomial is called the Newton’s form of Interpolating Polynomial.
+\subsection*{Newton’s Divided Difference Formula}
+Definition (Divided Differences):\newline
+Let $x_0, x_1, .. , x_n$ be distinct nodes. Let $p_n(x)$
+be the polynomial interpolating a function f at the nodes $x_0, x_1,.. ,x_n$ . The coeff. $x^n$ in $p_n(x)$ is given by f[$x_0,x_1,..x_n$] and is called nth divided differences of f. \newline
+The Newton’s form of interpolating polynomial may be written, using divided differences, as
+$$p_n(x)=f[x_0]+\sum_{k=1}^{n}f[x_0,x_1,..x_n]\prod_{i=0}^{k-1}(x-x_i)$$
+divided diff. follow the formula 
+$$f[x_0,x_1,..x_n]=\frac{f[x_1,x_2,..x_n]-f[x_0,x_1,..x_{n-1}]}{x_n-x_0}$$
+Example: by using the above formula we can make table for Divided Differences Table 
+let us take example of $p_5$ \newline
+\includegraphics[scale=0.5]{fig 4.5.jpeg}
+\newline and the table for n=5 is given by
+\newline 
+\includegraphics[scale=0.5]{fig 4.6.jpeg}
+\newline
+\subsubsection*{Divided Difference Formula for Repeated Nodes}
+Let $x_0, x_1, · · · , x_n \in $ [a, b] be distinct nodes and let f be n-times continuously differentiable function on the interval [a, b]. then we have the formula 
+$$f[x_0, x_1,... , x_n] = \int ...\int_{\tau_n}
+f^{(n)}
+(t_0x_0 + · · · + t_nx_n) dt_1 · · · dt_n,$$
+where 
+$$\tau_n=\{(t_1,t_2...t_n)/t_i\ge 0 ,i=0,1,2...n; \sum_{i=1}^{n}t_i\le 1\}$$ , $t_0=1-\sum_{i=1}^{n}t_i$ \newline
+
+\textit{Note}: I will not be discussing errors in interpolating polynomials although I studied it because I could not get good resources to write about it in a simple fashion.
+
+\subsection*{\textbf{Piecewise Polynomial Interpolation}}
+Polynomial interpolation will frequently be unreliable as a method for approximation. This is accurate if we insist on allowing the polynomial's order to continue increasing. However, if we apply different polynomials over various intervals with the length of the intervals getting shorter and shorter while maintaining the order of the polynomial, the resulting interpolating function approximates the supplied function more precisely.
+We will discuss about it by an example.
+Consider f(x)=sin($\frac{\pi}{2}e^x$); we are given the data \newline
+\begin{center}
+\begin{tabular}{ c | c | c |c  }
+x & 0 & 0.5 & 1 \\ 
+f(x) & 1.0000 & 0.5242  & -0.9037\\  
+\end{tabular}
+\end{center}
+and interpolating function is given by 
+s(x)= 1-0.9516x , x$\in$[0,0.5]\newline
+       and = 1.9521  -2.8558 x, x $\in$ [0.5, 1] \newline
+       we get the following table \newline
+       \includegraphics[scale=0.3]{fig 4.7.jpeg} 
+\newline   
+Another fig is attached for ref. \newline
+ \includegraphics[scale=0.4]{fig 4.8.jpeg} 
+
+\subsection*{Spline Interpolation }
+A piecewise interpolating function introduced in prev. section may not be differentiable at the nodes despite being continuous. To better approximate f(x), we want to find an interpolating function that is sufficiently smooth. Spline interpolation can do this.
+\subsubsection*{Properties of Spline interpolating function}
+Let us say it has degree d with nodes $x_i$ with i=0,1,2..is a function s(x) \newline
+(1) On each subinterval s(x) polynomial has degree $\le$ d.\newline
+(2) s(x) and its first (d-1) derivatives are continuous on [$x_0,x_n$] \newline
+(3) The interpolation conditions are satisfied i.e s($x_i$)=f($x_i$) , i=0,1,2..\newline
+For the sake of simplicity, we restrict only to
+d = 3, called the cubic spline interpolating function.
+\subsubsection*{Construction of a Cubic Spline}
+This method is taken directly from MA-214 Spring 2013 notes.
+The construction of a cubic spline interpolating function $s(x)$ of a function $f(x)$ is as follows:
+
+Step 1: Let us denote by $M_{1}, \cdots, M_{n}$,
+
+$$
+M_{i}=s^{\prime \prime}\left(x_{i}\right), \quad i=0,1, \cdots, n
+$$
+
+and first obtain $s(x)$ in terms of $M_{i}$ 's which are unknowns.
+
+Step 2: Since $s(x)$ is cubic on each $\left[x_{i-1}, x_{i}\right]$, the function $s^{\prime \prime}(x)$ is linear on the interval such that
+
+$$
+s^{\prime \prime}\left(x_{i-1}\right)=M_{i-1}, \quad s^{\prime \prime}\left(x_{i}\right)=M_{i} .
+$$
+
+Therefore, it is given by
+
+$$
+s^{\prime \prime}(x)=\frac{\left(x_{i}-x\right) M_{i-1}+\left(x-x_{i-1}\right) M_{i}}{x_{i}-x_{i-1}}, \quad x_{i-1} \leq x \leq x_{i}
+$$
+
+Integrating (5.33) two times with respect to $x$, we get
+
+$$
+s(x)=\frac{\left(x_{i}-x\right)^{3} M_{i-1}}{6\left(x_{i}-x_{i-1}\right)}+\frac{\left(x-x_{i-1}\right)^{3} M_{i}}{6\left(x_{i}-x_{i-1}\right)}+K_{1} x+K_{2},
+$$
+
+where $K_{1}$ and $K_{2}$ are integrating constants to be determined by using the interpolation conditions $s\left(x_{i-1}\right)=f\left(x_{i-1}\right)$ and $s\left(x_{i}\right)=f\left(x_{i}\right)$. We have
+
+$$
+ K_{1}=\frac{f\left(x_{i}\right)-f\left(x_{i-1}\right)}{x_{i}-x_{i-1}}-\frac{\left(M_{i}-M_{i-1}\right)\left(x_{i}-x_{i-1}\right)}{6} \\
+ K_{2}$$ $$K_1=\frac{x_{i} f\left(x_{i-1}\right)-x_{i-1} f\left(x_{i}\right)}{x_{i}-x_{i-1}}-\frac{\left(M_{i-1} x_{i}-M_{i} x_{i-1}\right)\left(x_{i}-x_{i-1}\right)}{6}
+$$
+Substituting these values in the above equation, we get
+
+$$
+s(x)=  \frac{\left(x_{i}-x\right)^{3} M_{i-1}+\left(x-x_{i-1}\right)^{3} M_{i}}{6\left(x_{i}-x_{i-1}\right)}+\frac{\left(x_{i}-x\right) f\left(x_{i-1}\right)+\left(x-x_{i-1}\right) f\left(x_{i}\right)}{x_{i}-x_{i-1}}$$ $$\\
+ -\frac{1}{6}\left(x_{i}-x_{i-1}\right)\left[\left(x_{i}-x\right) M_{i-1}+\left(x-x_{i-1}\right) M_{i}\right], \quad x_{i-1} \leq x \leq x_{i}
+$$
+
+
+Step 3: All that remains is to find the values of $M_{i}$ for all $i=0,1, \cdots, n$. This is obtained by ensuring the continuity of $s^{\prime}(x)$ over $[a, b]$, ie., the formula for $s^{\prime}(x)$ on $\left[x_{i-1}, x_{i}\right]$ and $\left[x_{i}, x_{i+1}\right]$ are required to give the same value at their common point $x=x_{i}$, for $i=1,2, \cdots, n-1$. After simplification, we get the system of linear equations for $i=$ $1,2, \cdots n-1$
+
+$$
+\frac{x_{i}-x_{i-1}}{6} M_{i-1}+\frac{x_{i+1}-x_{i-1}}{3} M_{i} and +\frac{x_{i+1}-x_{i}}{6} M_{i+1} \\
+and  =\frac{f\left(x_{i+1}\right)-f\left(x_{i}\right)}{x_{i+1}-x_{i}}-\frac{f\left(x_{i}\right)-f\left(x_{i-1}\right)}{x_{i}-x_{i-1}} .
+$$
+
+These $n-1$ equations together with the assumption that
+
+$$
+M_{0}=M_{n}=0
+$$
+
+leads to the values of $M_{0}, M_{1}, \cdots, M_{n}$ and hence to the interpolation function $s(x)$.
+
+A spline constructed above is called a natural spline.\pagebreak
+\section*{\textbf{\textit{Chapter 5}}}
+\section*{Numerical Integration}
+Numerical integration's goal is to approximate the integrand f with a less complex function that is simple to integrate. The interpolation of polynomials is one clear example of an approximation. So, using some carefully selected nodes $x_0$,.. , and $x_n$, we may approximate I(f) by I($p_n$), where $p_n$(x) is the interpolating polynomial for the integrand f. The approximation's general form is
+ $$I(f)\approx w_0f(x_0)+w_1f(x_1)+...w_nf(x_n) $$ where weights are given by $w_i=I(l_i)$  and $l_i$ is ith L.P.
+\subsubsection*{Rectangle Rule }
+Let us take n=0 , then the corresp I.P. is a const. function and hence
+$$I(p_0)=(b-a)f(x_0)$$
+1)If $x_0=a $ this approximation is called rectangle rule 
+$$I(p_0)=(b-a)f(a)$$
+2)If $x_0=\frac{a+b}{2}$ then it is called midpoint rule 
+$$I(p_0)=(b-a)f(\frac{a+b}{2})$$
+\subsubsection*{Error in rectangle rule}
+Let $f \in c^1[a,b]$  the mathematical error in rectangle rule is of the form
+$$ME_R(f)=\frac{f'(\eta)(b-a)^2}{2}$$
+for $\eta \in [a,b]$ \newline
+\subsubsection*{Trapezoidal Rule}
+now let us take n=1 then 
+$$p_1(x)=f(x_0)+f(x_0,x_1)(x-x_0)$$
+and hence $$I(f) \approx \int_{a}^{b}f(x_0)+f(x_0,x_1)(x-x_0)$$
+and the corresponding trapezoidal error is given by 
+$$ME_T(f)=-\frac{f''(\eta)(b-a)^3}{12}$$
+
+\subsubsection*{Simpson's Rule }
+If we take n=2 we get 
+$$I(f)=(b-a)/6\{f(a)+4f(\frac{a+b}{2}) + f(b)\}
+$$
+and $ME_s=I(f)-I(p_2)$
+$$ME_s(f)=-\frac{f''''(\eta)(b-a)^5}{2880}$$
+\newline
+Also in this chapter I took a brief idea of method of undetermined coefficients and Gaussian Rule.
+\pagebreak
+\section*{\textbf{\textit{Chapter 6}}}
+\section*{Numerical Differentiation}
+In this section we try to get formulas to obtain approximate values of derivatives.
+\subsection*{Approximations of First Derivative}
+\subsubsection*{Forward Difference Formula}
+$$f'(x) \approx \lim_{h\to0} \frac{f(x+h)-f(x)}{h}=D_h^+f(x) ;h>0 $$
+\subsubsection*{Backward Difference Formula}
+$$f'(x) \approx \lim_{h\to0} \frac{f(x)-f(x-h)}{h}=D_h^-f(x) ;h>0 $$
+\subsubsection*{Central Difference Formula}
+$$f'(x) \approx \lim_{h\to0} \frac{f(x+h)-f(x-h)}{2h}=D_h^0f(x) ;h>0 $$
+ \includegraphics[scale=0.4]{fig 4.9.jpeg}
+
+
+Approximating formulas for derivatives can be obtained in two ways  \newline
+1)Methods based on Interpolation\newline
+2)Methods based on Undetermined Coefficients \newline
+I took some time to look into these as well.\newline
+\newline
+\newline
+\newline
+\newline
+\newline
+\section*{\textbf{\textit{Numerical Analysis Revised PoA}}}
+$28^{th}$ June - $7^{th}$ July: Applications of numerical analysis in C++.\newline
+$8^{th}$ July - $19^{th}$ July : Application of numerical analysis in python and others.
+\end{document}
